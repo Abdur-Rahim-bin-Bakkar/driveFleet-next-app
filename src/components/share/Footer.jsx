@@ -1,60 +1,167 @@
+'use client'
+
+import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
+import logo from '@/assets/logo.png';
+import { FaFacebookF, FaGithub, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
 
 const Footer = () => {
-    return (
-        <div>
-            <footer className="footer footer-horizontal footer-center bg-black text-white text-base-content rounded p-10">
-                <nav className="grid grid-flow-col gap-4">
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
-                    <a className="link link-hover">Jobs</a>
-                    <a className="link link-hover">Press kit</a>
-                </nav>
-                <nav>
-                    <div className="grid grid-flow-col gap-4">
-                        <a className='border w-10 h-10 flex justify-center items-center rounded-full hover:scale-110 shadow-2xl shadow-amber-700 cursor-pointer duration-1000'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                className="fill-current">
-                                <path
-                                    d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"></path>
-                            </svg>
-                        </a>
-                        <a className='border w-10 h-10 flex justify-center items-center rounded-full hover:scale-110 shadow-2xl shadow-amber-300 cursor-pointer duration-1000'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                className="fill-current">
-                                <path
-                                    d="M19.615 3.184c-3.604-.246-11.631-.245-15.23 0-3.897.266-4.356 2.62-4.385 8.816.029 6.185.484 8.549 4.385 8.816 3.6.245 11.626.246 15.23 0 3.897-.266 4.356-2.62 4.385-8.816-.029-6.185-.484-8.549-4.385-8.816zm-10.615 12.816v-8l8 3.993-8 4.007z"></path>
-                            </svg>
-                        </a>
-                        <a className='border w-10 h-10 flex justify-center items-center rounded-full hover:scale-110 shadow-2xl shadow-amber-300 cursor-pointer duration-1000'>
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="24"
-                                height="24"
-                                viewBox="0 0 24 24"
-                                className="fill-current">
-                                <path
-                                    d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z"></path>
-                            </svg>
-                        </a>
-                    </div>
-                </nav>
-                <aside className='space-y-3'>
-                    <p>Copyright © {new Date().getFullYear()} - All right reserved by ACME Industries Ltd</p>
 
-                    <p>Developed by Abdur Rahim Bin Bakkar</p>
-                    <p>webdesignrahim4061@gmail.com</p>
-                </aside>
-            </footer>
-        </div>
+    return (
+        <footer className='bg-black text-white mt-20 text-center md:text-start'>
+
+            <div className='max-w-7xl mx-auto px-4 py-14 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10'>
+
+                {/* Logo & Description */}
+                <div>
+
+                    <Image
+                        src={logo}
+                        alt='logo'
+                        width={130}
+                        height={130}
+                        className='mb-4'
+                    />
+
+                    <p className='text-gray-400 leading-7'>
+                        DriveFleet is a modern car rental platform where users can
+                        explore, book, and manage premium cars easily and quickly.
+                    </p>
+
+                    {/* Social Icons */}
+
+
+                </div>
+
+
+                {/* Quick Links */}
+                <div>
+
+                    <h2 className='text-2xl font-bold mb-5'>
+                        Quick Links
+                    </h2>
+
+                    <div className='flex flex-col gap-3 text-gray-400'>
+
+                        <Link
+                            href={'/'}
+                            className='hover:text-[#36ADA3] duration-300'
+                        >
+                            Home
+                        </Link>
+
+                        <Link
+                            href={'/cars'}
+                            className='hover:text-[#36ADA3] duration-300'
+                        >
+                            Explore Cars
+                        </Link>
+
+                        <Link
+                            href={'/add-car'}
+                            className='hover:text-[#36ADA3] duration-300'
+                        >
+                            Add Car
+                        </Link>
+
+                        <Link
+                            href={'/bookings'}
+                            className='hover:text-[#36ADA3] duration-300'
+                        >
+                            My Bookings
+                        </Link>
+
+                    </div>
+
+                </div>
+
+
+                {/* Services */}
+                <div>
+
+                    <h2 className='text-2xl font-bold mb-5'>
+                        Services
+                    </h2>
+
+                    <div className='flex flex-col gap-3 text-gray-400'>
+
+                        <p>Luxury Car Rental</p>
+                        <p>Business Travel</p>
+                        <p>Airport Pickup</p>
+                        <p>Long Drive Support</p>
+                        <p>24/7 Customer Service</p>
+
+                    </div>
+
+                </div>
+
+
+                {/* Contact */}
+                <div>
+
+                    <h2 className='text-2xl font-bold mb-5'>
+                        Contact Info
+                    </h2>
+
+                    <div className='flex flex-col gap-3 text-gray-400'>
+
+                        <p>📍 Dhaka, Bangladesh</p>
+                        <p>📞 +8801873135444</p>
+                        <p>📧 webdesignrahim4061.com</p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            {/* Bottom Footer */}
+            <div className='flex gap-4 mt-6 justify-center mb-5'>
+
+                <Link
+                    href={'https://facebook.com'}
+                    target='_blank'
+                    className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
+                >
+                    <FaFacebookF />
+                </Link>
+
+                <Link
+                    href={'https://instagram.com'}
+                    target='_blank'
+                    className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
+                >
+                    <FaInstagram />
+                </Link>
+
+                <Link
+                    href={'https://linkedin.com'}
+                    target='_blank'
+                    className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
+                >
+                    <FaLinkedinIn />
+                </Link>
+
+                <Link
+                    href={'https://github.com'}
+                    target='_blank'
+                    className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
+                >
+                    <FaGithub />
+                </Link>
+
+            </div>
+            <div className='border-t border-gray-800 py-5 text-center text-gray-500 px-4'>
+
+                <p>
+                    © {new Date().getFullYear()} DriveFleet Rental Club. All Rights Reserved.
+                </p>
+
+            </div>
+
+        </footer>
     );
 };
 
