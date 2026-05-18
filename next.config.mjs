@@ -9,6 +9,10 @@ const nextConfig = {
         hostname: '**',
         
       },
+          {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
+      },
     ],
   },
 };

@@ -13,7 +13,7 @@ import { authClient } from '@/lib/auth-client';
 import { UserDropdown } from './UserDropdown';
 
 const Navbar = () => {
-    const handleSignOut = async (e)=>{
+    const handleSignOut = async (e) => {
         await authClient.signOut()
         console.log('out')
     }
@@ -24,7 +24,7 @@ const Navbar = () => {
         refetch //refetch the session
     } = authClient.useSession()
     console.log(session)
-    console.log(error)
+    // console.log(error)
 
     const path = usePathname();
     const [open, setOpen] = useState(false);
@@ -84,20 +84,22 @@ const Navbar = () => {
 
                 {/* Desktop Buttons */}
                 <div className='hidden md:flex items-center gap-3'>
-                    <Link href={'/login'}>
-                        <Button className='rounded-md  '>
-                            Login
-                        </Button>
-                    </Link>
 
-                    <Link href={'/reg'}>
-                        <Button className='rounded-md bg-[#36ADA3] text-white'>
-                            Register
-                        </Button>
-                    </Link>
-                    <UserDropdown/>
-                   
+                    {
+                        session ? <UserDropdown /> :
+
+                            <Link href={'/login'}>
+                                <Button className='rounded-md  bg-[#36ADA3]'>
+                                    Login
+                                </Button>
+                            </Link>
+
+
+
+
+                    }
                 </div>
+
 
 
                 {/* Mobile Menu Icon */}
@@ -140,14 +142,14 @@ const Navbar = () => {
                             Login
                         </Button>
                     </Link>
-                       
+
                     <Link href={'/reg'}>
                         <Button className='w-full rounded-md bg-[#36ADA3] text-white'>
                             Register
                         </Button>
-                        
+
                     </Link>
-                    
+
                 </div>
 
             </div>
