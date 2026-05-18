@@ -9,8 +9,22 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { GiHamburgerMenu } from 'react-icons/gi';
 import { RxCross2 } from 'react-icons/rx';
+import { authClient } from '@/lib/auth-client';
+import { UserDropdown } from './UserDropdown';
 
 const Navbar = () => {
+    const handleSignOut = async (e)=>{
+        await authClient.signOut()
+        console.log('out')
+    }
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+    console.log(session)
+    console.log(error)
 
     const path = usePathname();
     const [open, setOpen] = useState(false);
@@ -46,9 +60,9 @@ const Navbar = () => {
     </>
 
     return (
-        <nav className='sticky top-0 z-50 bg-white shadow-md'>
+        <nav className='sticky top-0 z-50 bg-white shadow-md py-2'>
 
-            <div className='max-w-7xl mx-auto flex justify-between items-center px-4 py-3'>
+            <div className='max-w-7xl mx-auto flex justify-between items-center px-4 py-3 h-15'>
 
                 {/* Logo */}
                 <Link href={'/'}>
@@ -81,6 +95,8 @@ const Navbar = () => {
                             Register
                         </Button>
                     </Link>
+                    <UserDropdown/>
+                   
                 </div>
 
 
@@ -124,12 +140,14 @@ const Navbar = () => {
                             Login
                         </Button>
                     </Link>
-
+                       
                     <Link href={'/reg'}>
                         <Button className='w-full rounded-md bg-[#36ADA3] text-white'>
                             Register
                         </Button>
+                        
                     </Link>
+                    
                 </div>
 
             </div>

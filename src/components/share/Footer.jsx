@@ -108,7 +108,7 @@ const Footer = () => {
 
                         <p>📍 Dhaka, Bangladesh</p>
                         <p>📞 +8801873135444</p>
-                        <p>📧 webdesignrahim4061.com</p>
+                        <p>📧 webdesignrahim4061@gmail.com</p>
 
                     </div>
 
@@ -128,13 +128,7 @@ const Footer = () => {
                     <FaFacebookF />
                 </Link>
 
-                <Link
-                    href={'https://instagram.com'}
-                    target='_blank'
-                    className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
-                >
-                    <FaInstagram />
-                </Link>
+               
 
                 <Link
                     href={'https://linkedin.com'}
