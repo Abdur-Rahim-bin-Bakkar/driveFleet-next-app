@@ -22,8 +22,9 @@ export function UserDropdown() {
     <Dropdown>
       <Button aria-label="Menu" variant="secondary" className={'flex items-center justify-between h-12 rounded-md'}>
         {
-          session&& 
-        <Image className="w-10 h-10 rounded-full" src={session?.user?.image} alt="user logo" width={100} height={100} />
+          session?.user?.image?
+        <Image className="w-10 h-10 rounded-full" src={session?.user?.image} alt="user logo" width={100} height={100} />:
+        <sapn className='border rounded-full w-10 h-10 flex justify-center items-center text-xl'>{session?.user?.name[0].toUpperCase()}</sapn>
         }
         <span className="text-[#36ADA3]">{session?.user?.name}</span>
       </Button>
