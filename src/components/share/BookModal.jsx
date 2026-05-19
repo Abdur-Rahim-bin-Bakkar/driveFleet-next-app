@@ -3,10 +3,11 @@
 import { authClient } from "@/lib/auth-client";
 import { Rocket } from "@gravity-ui/icons";
 import { Button, Label, Modal, Select, ListBox, Description, TextField, TextArea } from "@heroui/react";
+// import { date } from "better-auth";
 import { useState } from "react";
 import { FaCarAlt } from "react-icons/fa";
 
-export function BookModal({ session }) {
+export function BookModal({ session, carDetails }) {
     const [driver, setDriver] = useState('yes')
     const [message, setMessage] = useState('')
     console.log(driver)
@@ -15,8 +16,8 @@ export function BookModal({ session }) {
 
     const hangleBooking = async (e) => {
         const userId = await session?.user?.id
-
-        const bookingData = await { userId, driver, message }
+        const date = new Date()
+        const bookingData = await { userId, driver, message,carDetails ,date}
         const res = await fetch('http://localhost:5000/bookings', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
