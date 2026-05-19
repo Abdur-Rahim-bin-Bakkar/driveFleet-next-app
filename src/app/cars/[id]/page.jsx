@@ -3,6 +3,7 @@ import { auth } from '@/lib/auth';
 import { authClient } from '@/lib/auth-client';
 import { headers } from 'next/headers';
 import Image from 'next/image';
+import { notFound } from 'next/navigation';
 import React from 'react';
 import { CiLocationArrow1 } from 'react-icons/ci';
 import { FaCar } from 'react-icons/fa';
@@ -17,8 +18,14 @@ const CarDetailsPage = async ({ params }) => {
     const { id } = await params;
     console.log(id)
     const res = await fetch(`http://localhost:5000/car/${id}`)
+    // console.log(carDetails)
+    if (!res.ok) {
+        notFound()
+    }
     const carDetails = await res.json()
-    console.log(carDetails)
+    if (!carDetails) {
+        notFound();
+    }
     return (
         <div className='grid md:grid-cols-2 gap-5 max-w-11/12 mx-auto mt-10 shadow p-5'>
             <Image src={`${carDetails?.imageURL}?auto=format&fit=crop&w=800&q=80`} alt='car image' width={500} height={400} className='w-full object-center rounded-2xl' />

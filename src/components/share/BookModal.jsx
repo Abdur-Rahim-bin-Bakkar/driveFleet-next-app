@@ -51,7 +51,7 @@ export function BookModal({ session, carDetails }) {
                             </p>
                             <div className="px-2 space-y-3 mt-5">
                                 <Select onChange={setDriver} className="w-full" placeholder="Select one">
-                                    <Label>Need Driver</Label>
+                                    <Label>Driver Needed (Yes/No)</Label>
                                     <Select.Trigger>
                                         <Select.Value />
                                         <Select.Indicator />
@@ -72,7 +72,7 @@ export function BookModal({ session, carDetails }) {
 
                                 </Select>
                                 <TextField onChange={setMessage} className="w-full max-w-full" name="message">
-                                    <Label>Message</Label>
+                                    <Label>Special Note</Label>
                                     <TextArea placeholder="Write your message here..." rows={4} />
                                     <Description>Maximum 500 characters</Description>
                                 </TextField>
