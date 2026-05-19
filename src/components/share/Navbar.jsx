@@ -137,18 +137,19 @@ const Navbar = () => {
 
 
                 <div className='flex flex-col gap-3 mt-6'>
-                    <Link href={'/login'}>
-                        <Button className='w-full rounded-md '>
-                            Login
-                        </Button>
-                    </Link>
+                    {
+                        session ? <UserDropdown /> :
 
-                    <Link href={'/reg'}>
-                        <Button className='w-full rounded-md bg-[#36ADA3] text-white'>
-                            Register
-                        </Button>
+                            <Link href={'/login'}>
+                                <Button className='rounded-md  bg-[#36ADA3]'>
+                                    Login
+                                </Button>
+                            </Link>
 
-                    </Link>
+
+
+
+                    }
 
                 </div>
 

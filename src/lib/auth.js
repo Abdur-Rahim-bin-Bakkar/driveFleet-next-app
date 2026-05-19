@@ -10,15 +10,17 @@ export const auth = betterAuth({
     // Optional: if you don't provide a client, database transactions won't be enabled.
     client
   }),
-    emailAndPassword: { 
-    enabled: true, 
-    autoSignIn: false
-  }, 
-      socialProviders: {
-        google: { 
-            clientId: process.env.GOOGLE_CLIENT_ID, 
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET, 
-        }, 
+  emailAndPassword: {
+    enabled: true,
+    autoSignIn: false,
+   minPasswordLength: 6,
+    maxPasswordLength: 128,
+  },
+  socialProviders: {
+    google: {
+      clientId: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
     },
+  },
 
 });

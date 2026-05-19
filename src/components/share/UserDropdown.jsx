@@ -22,28 +22,47 @@ export function UserDropdown() {
     <Dropdown>
       <Button aria-label="Menu" variant="secondary" className={'flex items-center justify-between h-12 rounded-md'}>
         {
-          session?.user?.image?
-        <Image className="w-10 h-10 rounded-full" src={session?.user?.image} alt="user logo" width={100} height={100} />:
-        <sapn className='border rounded-full w-10 h-10 flex justify-center items-center text-xl'>{session?.user?.name[0].toUpperCase()}</sapn>
+          session?.user?.image ?
+            <Image className="w-10 h-10 rounded-full" src={session?.user?.image} alt="user logo" width={100} height={100} /> :
+            <span className='border rounded-full w-10 h-10 flex justify-center items-center text-xl'>{session?.user?.name[0]?.toUpperCase()}</span>
         }
-        <span className="text-[#36ADA3]">{session?.user?.name}</span>
+        {
+          session &&
+          <span className="text-[#36ADA3]">{session?.user?.name}</span>
+        }
       </Button>
       <Dropdown.Popover>
-        <Dropdown.Menu onAction={(key) => console.log(`Selected: ${key}`)}>
-          <Dropdown.Item id="new-file" textValue="New file">
-            <Label><Link href={'/'}>ADD Car</Link></Label>
-          </Dropdown.Item>
-          <Dropdown.Item id="copy-link" textValue="Copy link">
-            <Label><Link href={'/'}>My Bookings</Link></Label>
-          </Dropdown.Item>
-          <Dropdown.Item id="edit-file" textValue="Edit file">
-            <Label><Link href={'/'}>My Added Cars</Link></Label>
-          </Dropdown.Item>
-          <Dropdown.Item onClick={handleSignOut} id="delete-file" textValue="Delete file" variant="danger">
-            <Label><Button  className={'w-full bg-red-500'}>LogOut</Button></Label>
-          </Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown.Popover>
-    </Dropdown>
+  <Dropdown.Menu aria-label="User Menu">
+
+    <Dropdown.Item key="add-car">
+      <Link href="/add-car" className="w-full block">
+        Add Car
+      </Link>
+    </Dropdown.Item>
+
+    <Dropdown.Item key="my-bookings">
+      <Link href="/bookings" className="w-full block">
+        My Bookings
+      </Link>
+    </Dropdown.Item>
+
+    <Dropdown.Item key="my-added-cars">
+      <Link href="/my-added-cars" className="w-full block">
+        My Added Cars
+      </Link>
+    </Dropdown.Item>
+
+    <Dropdown.Item
+      key="logout"
+      className="text-red-500"
+      color="danger"
+      onPress={handleSignOut}
+    >
+      Logout
+    </Dropdown.Item>
+
+  </Dropdown.Menu>
+</Dropdown.Popover>
+    </Dropdown >
   );
 }
