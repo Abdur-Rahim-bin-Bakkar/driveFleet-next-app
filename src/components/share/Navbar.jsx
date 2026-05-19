@@ -23,7 +23,7 @@ const Navbar = () => {
         error, //error object
         refetch //refetch the session
     } = authClient.useSession()
-    console.log(session)
+    // console.log(session)
     // console.log(error)
 
     const path = usePathname();
