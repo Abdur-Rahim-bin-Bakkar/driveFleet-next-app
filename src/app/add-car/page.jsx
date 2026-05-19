@@ -2,6 +2,7 @@
 
 import { authClient } from "@/lib/auth-client";
 import { Button, Input, Textarea, Card, Select, TextField, Label, FieldError, TextArea, Description, ListBox } from "@heroui/react";
+import { redirect } from "next/navigation";
 // import { type } from './../../../.next/dev/types/routes.d';
 
 
@@ -13,9 +14,11 @@ const AddCarForm = () => {
         refetch //refetch the session
     } = authClient.useSession()
     const userId = session?.user?.id
+    console.log(session)
+    console.log(userId,'user id')
 
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(formData);
         const formData = new FormData(e.target);
@@ -23,7 +26,17 @@ const AddCarForm = () => {
         const data = Object.fromEntries(formData.entries());
 
         console.log(data);
-        const addedData = { ...data,userId }
+        const addedData = { ...data, userId }
+        const res = await fetch('http://localhost:5000/add-car', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(addedData)
+        })
+        const result = await res.json()
+        console.log(result)
+        if(result){
+            redirect('/cars')
+        }
     };
 
     return (
