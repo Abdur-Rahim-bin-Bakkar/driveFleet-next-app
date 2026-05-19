@@ -1,95 +1,187 @@
-// "use client";
+"use client";
+
+import { authClient } from "@/lib/auth-client";
+import { Button, Input, Textarea, Card, Select, TextField, Label, FieldError, TextArea, Description, ListBox } from "@heroui/react";
+// import { type } from './../../../.next/dev/types/routes.d';
 
 
-// const AddCarForm = () => {
+const AddCarForm = () => {
+    const {
+        data: session,
+        isPending, //loading state
+        error, //error object
+        refetch //refetch the session
+    } = authClient.useSession()
+    const userId = session?.user?.id
 
 
-//     const handleSubmit = (e) => {
-//         e.preventDefault();
-//         // console.log(formData);
-//           const formData = new FormData(e.target);
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        // console.log(formData);
+        const formData = new FormData(e.target);
 
-//   const data = Object.fromEntries(formData.entries());
+        const data = Object.fromEntries(formData.entries());
 
-//   console.log(data);
-//     };
+        console.log(data);
+        const addedData = { ...data,userId }
+    };
 
-//     return (
-//         <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
-//             <Card className="w-full max-w-2xl p-6 shadow-lg rounded-2xl">
-//                 <h2 className="text-2xl font-bold text-center text-[#36ADA3] mb-6">
-//                     Add New Car
-//                 </h2>
+    return (
+        <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
+            <Card className="w-full max-w-2xl p-6 shadow-lg rounded-2xl">
+                <h2 className="text-2xl font-bold text-center text-[#36ADA3] mb-6">
+                    Add New Car
+                </h2>
 
-//                 <form onSubmit={handleSubmit} className="space-y-6">
+                <form action="" onSubmit={handleSubmit} className="space-y-5">
+                    <TextField
+                        isRequired
+                        name="carName"
+                        validate={(value) => {
+                            if (value.length < 3) {
+                                return "Name must be at least 3 characters";
+                            }
+                            return null;
+                        }}
+                    >
+                        <Label>Name</Label>
+                        <Input placeholder="Enter your Name" />
+                        <FieldError />
+                    </TextField>
+                    <TextField
+                        isRequired
+                        name="dailyRentPrice"
+                        validate={(value) => {
+                            if (value.length < 3) {
+                                return "Name must be at least 3 characters";
+                            }
+                            return null;
+                        }}
+                    >
+                        <Label>Daily Rent Price</Label>
+                        <Input placeholder="Daily Rent Price" />
+                        <FieldError />
+                    </TextField>
+                    <TextField
+                        isRequired
+                        name="imageURL"
+                        type="url"
+                    // validate={(value) => {
+                    //   const urlPattern =
+                    //     /^(https?:\/\/)?([\w\-])+\.{1}[a-zA-Z]{2,}(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
 
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    //   if (!urlPattern.test(value)) {
+                    //     return "Please enter a valid image URL";
+                    //   }
 
-//                         <Input
-//                             label="Car Name"
-//                             name="carName"
-//                             placeholder="Toyota Corolla"
-//                         />
+                    //   return null;
+                    // }}
+                    >
+                        <Label>Image URL</Label>
 
-//                         <Input
-//                             label="Daily Rent Price"
-//                             name="dailyRentPrice"
-//                             type="number"
-//                             placeholder="500"
-//                         />
+                        <Input placeholder="Enter Image URL" />
 
-//                     </div>
+                        <FieldError />
+                    </TextField>
+                    <div className="md:flex items-center gap-5">
 
-//                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <Select name="carType" className="w-full" placeholder="Select one">
+                            <Label>Car Type</Label>
+                            <Select.Trigger>
+                                <Select.Value />
+                                <Select.Indicator />
+                            </Select.Trigger>
+                            <Select.Popover>
+                                <ListBox>
+                                    <ListBox.Item id="SUV" textValue="SUV">
+                                        SUV
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                    <ListBox.Item id="Sedan " textValue="Sedan ">
+                                        Sedan
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                    <ListBox.Item id="Hatchback  " textValue="Hatchback  ">
+                                        Hatchback
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                    <ListBox.Item id="Luxury  " textValue="Luxury  ">
+                                        Luxury
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
 
-//                         <Select label="Car Type" name="carType">
-//                             <SelectItem key="SUV">SUV</SelectItem>
-//                             <SelectItem key="Sedan">Sedan</SelectItem>
-//                             <SelectItem key="Hatchback">Hatchback</SelectItem>
-//                             <SelectItem key="Luxury">Luxury</SelectItem>
-//                         </Select>
+                                </ListBox>
+                            </Select.Popover>
+                        </Select>
+                        <Select name="availabilityStatus" className="w-full" placeholder="Select one">
+                            <Label>Availability Status</Label>
+                            <Select.Trigger>
+                                <Select.Value />
+                                <Select.Indicator />
+                            </Select.Trigger>
+                            <Select.Popover>
+                                <ListBox>
+                                    <ListBox.Item id="Avaible" textValue="Avaible">
+                                        Avaible
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
+                                    <ListBox.Item id="Unavaible" textValue="Unavaible">
+                                        Unavaible
+                                        <ListBox.ItemIndicator />
+                                    </ListBox.Item>
 
-//                         <Select label="Availability Status" name="availabilityStatus">
-//                             <SelectItem key="Available">Available</SelectItem>
-//                             <SelectItem key="Unavailable">Unavailable</SelectItem>
-//                         </Select>
+                                </ListBox>
+                            </Select.Popover>
+                        </Select>
+                    </div>
+                    <TextField
+                        isRequired
+                        name="pickupLocation"
+                        validate={(value) => {
+                            if (value.length < 3) {
+                                return "Name must be at least 3 characters";
+                            }
+                            return null;
+                        }}
+                    >
+                        <Label>Pickup Location</Label>
+                        <Input placeholder="Pickup Location" />
+                        <FieldError />
+                    </TextField>
+                    <TextField
+                        isRequired
+                        name="seatCapacity"
+                        // validate={(value) => {
+                        //     if (value.length < 0) {
+                        //         return "Name must be at least 0 characters";
+                        //     }
+                        //     return null;
+                        // }}
+                        defaultValue="5"
+                    >
+                        <Label>Seat Capacity
+                        </Label>
+                        <Input placeholder="Seat Capacity
+" />
+                        <FieldError />
+                    </TextField>
+                    <TextField className="w-full max-w-full" name="description">
+                        <Label>Description</Label>
+                        <TextArea placeholder="Write your message here..." rows={3} />
+                        <Description>Maximum 500 characters</Description>
+                    </TextField>
 
-//                     </div>
 
-//                     <Input
-//                         label="Image URL"
-//                         name="imageURL"
-//                         placeholder="https://..."
-//                     />
 
-//                     <Input
-//                         label="Seat Capacity"
-//                         name="seatCapacity"
-//                         type="number"
-//                     />
 
-//                     <Input
-//                         label="Pickup Location"
-//                         name="pickupLocation"
-//                     />
 
-//                     <Textarea
-//                         label="Description"
-//                         name="description"
-//                         minRows={4}
-//                     />
 
-//                     <Button
-//                         type="submit"
-//                         className="w-full bg-[#36ADA3] text-white font-semibold text-lg py-2 rounded-xl"
-//                     >
-//                         Add Car
-//                     </Button>
+                    <Button type="submit">ADD The Car</Button>
+                </form>
 
-//                 </form>
-//             </Card>
-//         </div>
-//     );
-// };
+            </Card>
+        </div>
+    );
+};
 
-// export default AddCarForm;
+export default AddCarForm;

@@ -18,7 +18,7 @@ export function BookModal({ session, carDetails }) {
     const hangleBooking = async (e) => {
         const userId = await session?.user?.id
         const date = new Date()
-        const bookingData = await { userId, driver, message,carDetails ,date}
+        const bookingData = await { userId, driver, message, carDetails, date }
         const res = await fetch('http://localhost:5000/bookings', {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -27,7 +27,7 @@ export function BookModal({ session, carDetails }) {
         })
         const result = await res.json()
         console.log(result, 'submiting result')
-        if(result){
+        if (result) {
             redirect('/bookings')
         }
     }
