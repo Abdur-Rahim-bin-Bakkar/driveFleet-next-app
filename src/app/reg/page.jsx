@@ -113,7 +113,7 @@ const RegisterPage = () => {
           <div className="flex gap-2">
             <Button type="submit" className={'bg-[#36ADA3] w-full my-2'}>
               <Check />
-              Login
+              Create Account
             </Button>
 
           </div>

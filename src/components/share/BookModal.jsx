@@ -16,6 +16,15 @@ export function BookModal({ session, carDetails }) {
     console.log(session)
 
     const hangleBooking = async (e) => {
+            // const {
+            //     data: session,
+            //     isPending, //loading state
+            //     error, //error object
+            //     refetch //refetch the session
+            // } = authClient.useSession()
+            if(!session){
+                redirect('/login')
+            }
         const userId = await session?.user?.id
         const date = new Date()
         const bookingData = await { userId, driver, message, carDetails, date }

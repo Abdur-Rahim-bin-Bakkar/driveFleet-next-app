@@ -1,12 +1,9 @@
-"use client";
-
+'use client'
 import { authClient } from "@/lib/auth-client";
 import { Button, Input, Textarea, Card, Select, TextField, Label, FieldError, TextArea, Description, ListBox } from "@heroui/react";
 import { redirect } from "next/navigation";
-// import { type } from './../../../.next/dev/types/routes.d';
 
-
-const AddCarForm = () => {
+const UpdateCar = ({ data }) => {
     const {
         data: session,
         isPending, //loading state
@@ -14,31 +11,32 @@ const AddCarForm = () => {
         refetch //refetch the session
     } = authClient.useSession()
     const userId = session?.user?.id
-    console.log(session)
-    console.log(userId,'user id')
-
-
+    // console.log(session)
+    // console.log(data._id, 'user id')
+    // console.log(data, 'hya ekahn thekei')
     const handleSubmit = async (e) => {
         e.preventDefault();
         // console.log(formData);
         const formData = new FormData(e.target);
 
-        const data = Object.fromEntries(formData.entries());
+        const updateData = Object.fromEntries(formData.entries());
+        console.log(updateData)
+        const {imageURL,availabilityStatus,pickupLocation,description,carType,dailyRentPrice} = updateData
 
-        console.log(data);
-        const addedData = { ...data, userId }
-        const res = await fetch('http://localhost:5000/add-car', {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(addedData)
+        console.log(availabilityStatus, 'ache naki ki bolo')
+        const res = await fetch(`http://localhost:5000/add-car/${data?._id}`,{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            body:JSON.stringify({imageURL,availabilityStatus,pickupLocation,description,carType,dailyRentPrice})
         })
-        const result = await res.json()
-        console.log(result)
-        if(result){
-            redirect('/cars')
-        }
-    };
+        const resDAta = await res.json()
+        console.log(resDAta,'success hoyche naki mama')
 
+        if(resDAta){
+            redirect('/my-added-cars')
+        }
+
+    }
     return (
         <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
             <Card className="w-full max-w-2xl p-6 shadow-lg rounded-2xl">
@@ -47,7 +45,7 @@ const AddCarForm = () => {
                 </h2>
 
                 <form action="" onSubmit={handleSubmit} className="space-y-5">
-                    <TextField
+                    {/* <TextField
                         isRequired
                         name="carName"
                         validate={(value) => {
@@ -60,8 +58,9 @@ const AddCarForm = () => {
                         <Label>Name</Label>
                         <Input placeholder="Enter your Name" />
                         <FieldError />
-                    </TextField>
+                    </TextField> */}
                     <TextField
+                        defaultValue={data?.dailyRentPrice}
                         isRequired
                         name="dailyRentPrice"
                         validate={(value) => {
@@ -77,6 +76,7 @@ const AddCarForm = () => {
                     </TextField>
                     <TextField
                         isRequired
+                        defaultValue={data?.imageURL}
                         name="imageURL"
                         type="url"
                     // validate={(value) => {
@@ -98,7 +98,9 @@ const AddCarForm = () => {
                     </TextField>
                     <div className="md:flex items-center gap-5">
 
-                        <Select name="carType" className="w-full" placeholder="Select one">
+                        <Select
+                            defaultValue={data?.carType}
+                            name="carType" className="w-full" placeholder="Select one">
                             <Label>Car Type</Label>
                             <Select.Trigger>
                                 <Select.Value />
@@ -126,7 +128,9 @@ const AddCarForm = () => {
                                 </ListBox>
                             </Select.Popover>
                         </Select>
-                        <Select name="availabilityStatus" className="w-full" placeholder="Select one">
+                        <Select
+                            defaultValue={data?.availabilityStatus}
+                            name="availabilityStatus" className="w-full" placeholder="Select one">
                             <Label>Availability Status</Label>
                             <Select.Trigger>
                                 <Select.Value />
@@ -148,6 +152,7 @@ const AddCarForm = () => {
                         </Select>
                     </div>
                     <TextField
+                        defaultValue={data?.pickupLocation}
                         isRequired
                         name="pickupLocation"
                         validate={(value) => {
@@ -161,7 +166,7 @@ const AddCarForm = () => {
                         <Input placeholder="Pickup Location" />
                         <FieldError />
                     </TextField>
-                    <TextField
+                    {/* <TextField
                         isRequired
                         name="seatCapacity"
                         // validate={(value) => {
@@ -174,10 +179,11 @@ const AddCarForm = () => {
                     >
                         <Label>Seat Capacity
                         </Label>
-                        <Input placeholder="Seat Capacity" />
+                        <Input placeholder="Seat Capacity
+        " />
                         <FieldError />
-                    </TextField>
-                    <TextField className="w-full max-w-full" name="description">
+                    </TextField> */}
+                    <TextField defaultValue={data?.description} className="w-full max-w-full" name="description">
                         <Label>Description</Label>
                         <TextArea placeholder="Write your message here..." rows={3} />
                         <Description>Maximum 500 characters</Description>
@@ -188,7 +194,7 @@ const AddCarForm = () => {
 
 
 
-                    <Button type="submit" className={'bg-transparent  w-full font-bold border border-green-500 text-green-500'}>Add Car</Button>
+                    <Button type="submit" className={'bg-transparent  w-full font-bold border border-green-500 text-green-500'}>Update</Button>
                 </form>
 
             </Card>
@@ -196,4 +202,4 @@ const AddCarForm = () => {
     );
 };
 
-export default AddCarForm;
+export default UpdateCar;

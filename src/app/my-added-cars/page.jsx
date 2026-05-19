@@ -1,8 +1,13 @@
 import AddCarCard from '@/components/share/AddCarCard';
+import { auth } from '@/lib/auth';
+import { headers } from 'next/headers';
 import React from 'react';
 
 const MyAddedPage = async () => {
-    const res = await fetch('http://localhost:5000/add-car/6a0c2480f3f29f65c6a6f308')
+        const session = await auth.api.getSession({
+            headers: await headers() // you need to pass the headers object.
+        })
+    const res = await fetch(`http://localhost:5000/add-car/${session?.user?.id}`)
     const myAddCars = await res.json()
     console.log(myAddCars)
     return (
