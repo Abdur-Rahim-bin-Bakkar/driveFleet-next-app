@@ -1,0 +1,31 @@
+import Image from 'next/image';
+import React from 'react';
+import { CiLocationArrow1 } from 'react-icons/ci';
+import { FaCar } from 'react-icons/fa';
+import { FiUsers } from 'react-icons/fi';
+import { MdEventAvailable, MdOutlinePriceChange } from 'react-icons/md';
+
+const CarDetailsPage = async ({ params }) => {
+    const { id } = await params;
+    console.log(id)
+    const res = await fetch(`http://localhost:5000/car/${id}`)
+    const carDetails = await res.json()
+    console.log(carDetails)
+    return (
+        <div className='grid md:grid-cols-2 gap-5 max-w-11/12 mx-auto mt-10 shadow p-5'>
+            <Image src={`${carDetails?.imageURL}?auto=format&fit=crop&w=800&q=80`} alt='car image' width={500} height={400} className='w-full object-center rounded-2xl' />
+            <div className="space-y-3">
+                <h1 className='font-bold text-lg'>{carDetails?.carName}</h1>
+                <p className='text-black/70'>{carDetails?.description}</p>
+
+                <span className='flex items-center gap-4 text-gray-500'><CiLocationArrow1 /><span>Location:  </span>     {carDetails?.pickupLocation}</span>
+                <span className='flex items-center gap-4 text-gray-500'><FiUsers /> {carDetails?.seatCapacity} Seat Capacity</span>
+                <span className='flex items-center gap-4 text-gray-500'><FaCar />{carDetails?.carType} Seat Capacity</span>
+                <span className='flex items-center gap-4 text-gray-500'><MdEventAvailable />{carDetails?.availabilityStatus}  </span>
+                <span className='flex items-center gap-4 text-gray-500'><MdOutlinePriceChange />{carDetails?.dailyRentPrice} Dollar  </span>
+            </div>
+        </div>
+    );
+};
+
+export default CarDetailsPage;
