@@ -1,15 +1,31 @@
 "use client";
 
+import { authClient } from "@/lib/auth-client";
 import { Rocket } from "@gravity-ui/icons";
 import { Button, Label, Modal, Select, ListBox, Description, TextField, TextArea } from "@heroui/react";
 import { useState } from "react";
 import { FaCarAlt } from "react-icons/fa";
 
-export function BookModal() {
+export function BookModal({ session }) {
     const [driver, setDriver] = useState('yes')
-    const [message,setMessage] = useState('')
+    const [message, setMessage] = useState('')
     console.log(driver)
     console.log(message)
+    console.log(session)
+
+    const hangleBooking = async (e) => {
+        const userId = await session?.user?.id
+
+        const bookingData = await { userId, driver, message }
+        const res = await fetch('http://localhost:5000/bookings', {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(bookingData)
+
+        })
+        const result = await res.json()
+        console.log(result, 'submiting result')
+    }
     return (
         <Modal>
             <Button variant="secondary" className={'w-full my-2 text-white font-bold bg-green-500'}>Book Now</Button>
@@ -58,7 +74,7 @@ export function BookModal() {
                             </div>
                         </Modal.Body>
                         <Modal.Footer>
-                            <Button className="w-full" slot="close">
+                            <Button onClick={hangleBooking} className="w-full" slot="close">
                                 Continue Book The Car
                             </Button>
                         </Modal.Footer>
