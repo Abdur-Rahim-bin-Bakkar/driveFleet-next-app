@@ -1,3 +1,4 @@
+import { BookModal } from '@/components/share/BookModal';
 import Image from 'next/image';
 import React from 'react';
 import { CiLocationArrow1 } from 'react-icons/ci';
@@ -18,11 +19,15 @@ const CarDetailsPage = async ({ params }) => {
                 <h1 className='font-bold text-lg'>{carDetails?.carName}</h1>
                 <p className='text-black/70'>{carDetails?.description}</p>
 
-                <span className='flex items-center gap-4 text-gray-500'><CiLocationArrow1 /><span>Location:  </span>     {carDetails?.pickupLocation}</span>
-                <span className='flex items-center gap-4 text-gray-500'><FiUsers /> {carDetails?.seatCapacity} Seat Capacity</span>
-                <span className='flex items-center gap-4 text-gray-500'><FaCar />{carDetails?.carType} Seat Capacity</span>
-                <span className='flex items-center gap-4 text-gray-500'><MdEventAvailable />{carDetails?.availabilityStatus}  </span>
-                <span className='flex items-center gap-4 text-gray-500'><MdOutlinePriceChange />{carDetails?.dailyRentPrice} Dollar  </span>
+                <span className='flex items-center gap-4 text-gray-500 bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><CiLocationArrow1 /><span>Location:  </span>     {carDetails?.pickupLocation}</span>
+                <span className='flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><FiUsers /> {carDetails?.seatCapacity} Seat Capacity</span>
+                <span className='flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><FaCar />{carDetails?.carType} Seat Capacity</span>
+                <span className={`flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1 ${carDetails?.availabilityStatus === 'Unavailable' ? 'text-red-600' : 'text-green-600'}`}><MdEventAvailable />{carDetails?.availabilityStatus}  </span>
+                <span className='flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><MdOutlinePriceChange />{carDetails?.dailyRentPrice} Dollar  </span>
+
+                <BookModal/>
+
+
             </div>
         </div>
     );
