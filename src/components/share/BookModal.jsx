@@ -3,6 +3,7 @@
 import { authClient } from "@/lib/auth-client";
 import { Rocket } from "@gravity-ui/icons";
 import { Button, Label, Modal, Select, ListBox, Description, TextField, TextArea } from "@heroui/react";
+import { redirect } from "next/navigation";
 // import { date } from "better-auth";
 import { useState } from "react";
 import { FaCarAlt } from "react-icons/fa";
@@ -26,6 +27,9 @@ export function BookModal({ session, carDetails }) {
         })
         const result = await res.json()
         console.log(result, 'submiting result')
+        if(result){
+            redirect('/bookings')
+        }
     }
     return (
         <Modal>
