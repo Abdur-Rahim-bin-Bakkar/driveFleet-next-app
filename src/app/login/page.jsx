@@ -14,6 +14,7 @@ const LoginPage = () => {
       provider: "google",
     });
   };
+
   const onSubmit = async (e) => {
     e.preventDefault()
     const formData = new FormData(e.target)
@@ -92,11 +93,11 @@ const LoginPage = () => {
             <span className="text-center font-bold"> OR</span>
             <Separator variant="default" />
           </div>
-          <Button onClick={goooglesignIn} type="submit" className={'border bg-transparent text-success font-bold w-full my-2 flex justify-center items-center'}>
-            <Image src={logo} className="w-5" alt="google logo"></Image>
-            Login With Google
-          </Button>
         </Form>
+        <Button onClick={goooglesignIn} type="submit" className={'border bg-transparent text-success font-bold w-full my-2 flex justify-center items-center'}>
+          <Image src={logo} className="w-5" alt="google logo"></Image>
+          Login With Google
+        </Button>
       </Card>
     </div>
   );

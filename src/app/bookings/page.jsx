@@ -1,3 +1,5 @@
+import dns from "node:dns/promises";
+dns.setServers(["1.1.1.1", "8.8.8.8"]);
 import BookingCars from '@/components/share/BookingCars';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
@@ -7,11 +9,19 @@ import { FaBoxOpen } from 'react-icons/fa';
 
 const BookingPage = async () => {
     const session = await auth.api.getSession({
-        headers: await headers() // you need to pass the headers object.
+        headers: await headers() 
     })
+    const {token} = await auth.api.getToken({
+        headers: await headers()
+    })
+    console.log(token,'token')
 
     console.log(session?.user?.id)
-    const res = await fetch(`http://localhost:5000/bookings/${session?.user?.id}`)
+    const res = await fetch(`http://localhost:5000/bookings/${session?.user?.id}` ,{
+       headers:{
+         authorization:`Bearer ${token}`
+       }
+    })
     const bookinsCar = await res.json()
     console.log(bookinsCar)
     if (bookinsCar.length < 1) {

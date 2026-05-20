@@ -4,7 +4,7 @@ import React from 'react';
 import { CiCalendarDate, CiLocationArrow1 } from 'react-icons/ci';
 
 const BookingCars = ({ car }) => {
-    console.log(car?.carDetails?.imageURL)
+    // console.log(car?.carDetails?.imageURL)
     // const date = new Date(car?.date)
     // console.log(date, 'date')
 
@@ -26,7 +26,7 @@ const BookingCars = ({ car }) => {
 
     const finalFormat = `${formattedDate} • ${formattedTime}`;
 
-    console.log(finalFormat);
+    // console.log(finalFormat);
     return (
         <Card className='flex-row justify-between items-center rounded-md p-2 px-5 bg-white shadow   hover:shadow-2xl hover:scale-103 hover:-translate-y-2 duration-500'>
             <div className="grid md:grid-cols-2 gap-1">
