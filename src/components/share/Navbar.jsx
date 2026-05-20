@@ -85,7 +85,7 @@ const Navbar = () => {
                 {/* Desktop Buttons */}
                 <div className='hidden md:flex items-center gap-3'>
 
-                    {
+                    {isPending?<span>User Loading.....</span>:
                         session ? <UserDropdown /> :
 
                             <Link href={'/login'}>

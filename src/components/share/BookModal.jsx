@@ -13,7 +13,8 @@ export function BookModal({ session, carDetails }) {
     const [message, setMessage] = useState('')
     console.log(driver)
     console.log(message)
-    console.log(session)
+    console.log(carDetails?._id, 'ami koro kichu ki')
+    const id = carDetails?._id
 
     const hangleBooking = async (e) => {
             // const {
@@ -35,6 +36,14 @@ export function BookModal({ session, carDetails }) {
 
         })
         const result = await res.json()
+
+        const res2 = await fetch(`http://localhost:5000/bookings/${id}`,{
+            method:'PATCH',
+            headers:{'Content-Type':'application/json'},
+            // body:JSON.stringify({name,age,email,role})
+        })
+        const result2 = await res2.json()
+        console.log(result2, 'this is result 2')
         console.log(result, 'submiting result')
         if (result) {
             redirect('/bookings')

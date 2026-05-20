@@ -4,10 +4,12 @@ import { authClient } from "@/lib/auth-client";
 import { Button, Dropdown, Label } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export function UserDropdown() {
   const handleSignOut = async (e) => {
     await authClient.signOut()
+    redirect('/login')
     console.log('out')
   }
   const {

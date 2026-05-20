@@ -18,7 +18,7 @@ const CarCard = ({ car }) => {
             <span className='flex items-center gap-4 text-gray-500'><CiLocationArrow1 />{car?.pickupLocation}</span>
             <span className='flex items-center gap-4 text-gray-500'><FiUsers /> {car?.seatCapacity} Seat Capacity</span>
             <Link href={`/cars/${car?._id}`}>
-                <Button className={'bg-[#36ADA3] w-full'}>View Details</Button>
+                <Button className={'bg-[#36ADA3] w-full shadow hover:shadow-2xl hover:bg-[#36ADA5] duration-500'}>View Details</Button>
             </Link>
         </Card>
     );
