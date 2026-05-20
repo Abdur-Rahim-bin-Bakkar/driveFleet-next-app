@@ -5,6 +5,9 @@ import { Button, Dropdown, Label } from "@heroui/react";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { CiFaceMeh } from "react-icons/ci";
+import { FaHandHoldingMedical } from "react-icons/fa";
+import { IoIosAddCircleOutline, IoIosLogOut } from "react-icons/io";
 
 export function UserDropdown() {
   const handleSignOut = async (e) => {
@@ -34,37 +37,43 @@ export function UserDropdown() {
         }
       </Button>
       <Dropdown.Popover>
-  <Dropdown.Menu aria-label="User Menu">
+        <Dropdown.Menu aria-label="User Menu">
 
-    <Dropdown.Item key="add-car">
-      <Link href="/add-car" className="w-full block">
-        Add Car
-      </Link>
-    </Dropdown.Item>
+          <Dropdown.Item key="add-car">
+            <Link href="/add-car" className="w-full flex items-center gap-2 underline">
+             <IoIosAddCircleOutline />
+              Add Car
+            </Link>
+          </Dropdown.Item>
 
-    <Dropdown.Item key="my-bookings">
-      <Link href="/bookings" className="w-full block">
-        My Bookings
-      </Link>
-    </Dropdown.Item>
+          <Dropdown.Item key="my-bookings">
+            <Link href="/bookings" className="w-full flex items-center gap-2 underline">
+             <CiFaceMeh />
+              My Bookings
+            </Link>
+          </Dropdown.Item>
 
-    <Dropdown.Item key="my-added-cars">
-      <Link href="/my-added-cars" className="w-full block">
-        My Added Cars
-      </Link>
-    </Dropdown.Item>
+          <Dropdown.Item key="my-added-cars">
+            <Link href="/my-added-cars" className="w-full  underline flex items-center gap-2">
+            <FaHandHoldingMedical />
 
-    <Dropdown.Item
-      key="logout"
-      className="text-red-500"
-      color="danger"
-      onPress={handleSignOut}
-    >
-      Logout
-    </Dropdown.Item>
+              My Added Cars
+            </Link>
+          </Dropdown.Item>
 
-  </Dropdown.Menu>
-</Dropdown.Popover>
+          <Dropdown.Item
+            key="logout"
+            className="text-red-500 flex items-center gap-2"
+            color="danger"
+            onPress={handleSignOut}
+
+          >
+            <IoIosLogOut />
+            Logout
+          </Dropdown.Item>
+
+        </Dropdown.Menu>
+      </Dropdown.Popover>
     </Dropdown >
   );
 }

@@ -11,6 +11,9 @@ import { GiHamburgerMenu } from 'react-icons/gi';
 import { RxCross2 } from 'react-icons/rx';
 import { authClient } from '@/lib/auth-client';
 import { UserDropdown } from './UserDropdown';
+import { FaHome, FaInternetExplorer } from 'react-icons/fa';
+import { IoIosAddCircleOutline } from 'react-icons/io';
+import { CiFaceMeh } from 'react-icons/ci';
 
 const Navbar = () => {
     const handleSignOut = async (e) => {
@@ -32,37 +35,41 @@ const Navbar = () => {
     const links = <>
         <Link
             onClick={() => setOpen(false)}
-            className={`${path === '/' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300`}
+            className={`${path === '/' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300 flex items-center gap-2`}
             href={'/'}>
+            <FaHome />
             Home
         </Link>
 
         <Link
             onClick={() => setOpen(false)}
-            className={`${path === '/cars' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300`}
+            className={`${path === '/cars' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300 flex items-center gap-2`}
             href={'/cars'}>
+                <FaInternetExplorer />
             Explore Cars
         </Link>
 
         <Link
             onClick={() => setOpen(false)}
-            className={`${path === '/add-car' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300`}
+            className={`${path === '/add-car' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300 flex items-center gap-2`}
             href={'/add-car'}>
+                <IoIosAddCircleOutline />
             Add Car
         </Link>
 
         <Link
             onClick={() => setOpen(false)}
-            className={`${path === '/bookings' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300`}
+            className={`${path === '/bookings' ? 'text-[#36ADA3] underline' : ''} hover:text-[#36ADA3] duration-300 flex items-center gap-2`}
             href={'/bookings'}>
+                <CiFaceMeh />
             My Bookings
         </Link>
     </>
 
     return (
-        <nav className='sticky top-0 z-50 bg-white shadow-md py-2'>
+        <nav className='sticky top-0 z-50 bg-white py-2'>
 
-            <div className='max-w-7xl mx-auto flex justify-between items-center px-4 py-3 h-15'>
+            <div className='md:mx-10  md:shadow flex justify-between items-center px-4 py-3 h-15 md:rounded-2xl bg-white/20'>
 
                 {/* Logo */}
                 <Link href={'/'}>
@@ -71,7 +78,7 @@ const Navbar = () => {
                         alt='logo'
                         width={120}
                         height={120}
-                        className='w-28 md:w-32 cursor-pointer hover:scale-105 duration-500 rounded-full'
+                        className='w-24 h-10 md:w-28 cursor-pointer hover:scale-105 duration-500 rounded-full'
                     />
                 </Link>
 
