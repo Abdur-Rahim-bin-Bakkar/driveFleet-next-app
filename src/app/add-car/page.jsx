@@ -15,10 +15,10 @@ const AddCarForm = () => {
     } = authClient.useSession()
     const userId = session?.user?.id
     console.log(session)
-    console.log(userId,'user id')
-
+    console.log(userId, 'user id')
 
     const handleSubmit = async (e) => {
+        const { data: tokenData } = await authClient.token()
         e.preventDefault();
         // console.log(formData);
         const formData = new FormData(e.target);
@@ -29,12 +29,16 @@ const AddCarForm = () => {
         const addedData = { ...data, userId }
         const res = await fetch('http://localhost:5000/add-car', {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
+            headers: {
+                "Content-Type": "application/json",
+
+                authorization: `Bearer ${tokenData}`
+            },
             body: JSON.stringify(addedData)
         })
         const result = await res.json()
         console.log(result)
-        if(result){
+        if (result) {
             redirect('/cars')
         }
     };

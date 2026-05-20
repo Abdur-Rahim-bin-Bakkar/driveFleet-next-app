@@ -15,10 +15,17 @@ const CarDetailsPage = async ({ params }) => {
     const session = await auth.api.getSession({
         headers: await headers() // you need to pass the headers object.
     })
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
 
     const { id } = await params;
     console.log(id)
-    const res = await fetch(`http://localhost:5000/car/${id}`)
+    const res = await fetch(`http://localhost:5000/car/${id}`, {
+        headers: {
+            authorization: `Bearer ${token}`
+        }
+    })
     // console.log(carDetails)
     if (!res.ok) {
         notFound()
@@ -39,7 +46,7 @@ const CarDetailsPage = async ({ params }) => {
                 <span className='flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><FaCar />{carDetails?.carType} Seat Capacity</span>
                 <span className={`flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1 ${carDetails?.availabilityStatus === 'Unavailable' ? 'text-red-600' : 'text-green-600'}`}><MdEventAvailable />{carDetails?.availabilityStatus}  </span>
                 <span className='flex items-center gap-4 text-gray-500  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1'><MdOutlinePriceChange />{carDetails?.dailyRentPrice} Dollar  </span>
-                <span className='flex items-center gap-4  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1 underline text-red-400'><SiBookingdotcom  />{carDetails?.bookUser ? `${carDetails?.bookUser} Booking`  : 'no Booking'}   </span>
+                <span className='flex items-center gap-4  bg-gray-200 hover:bg-gray-300 duration-500 rounded-md px-2 py-1 underline text-red-400'><SiBookingdotcom />{carDetails?.bookUser ? `${carDetails?.bookUser} Booking` : 'no Booking'}   </span>
 
                 <BookModal session={session} carDetails={carDetails} />
 

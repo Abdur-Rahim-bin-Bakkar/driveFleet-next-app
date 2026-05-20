@@ -4,10 +4,17 @@ import { headers } from 'next/headers';
 import React from 'react';
 
 const MyAddedPage = async () => {
-        const session = await auth.api.getSession({
-            headers: await headers() // you need to pass the headers object.
+    const { token } = await auth.api.getToken({
+        headers: await headers()
+    })
+    const session = await auth.api.getSession({
+        headers: await headers() // you need to pass the headers object.
+    })
+    const res = await fetch(`http://localhost:5000/add-car/${session?.user?.id}`,{
+           headers:{
+             authorization:`Bearer ${token}`
+           }
         })
-    const res = await fetch(`http://localhost:5000/add-car/${session?.user?.id}`)
     const myAddCars = await res.json()
     console.log(myAddCars)
     return (
