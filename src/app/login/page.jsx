@@ -6,9 +6,10 @@ import Link from "next/link";
 import logo from '@/assets/google.png'
 import { redirect } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import { toast } from "react-toastify";
 
 const LoginPage = () => {
-    const goooglesignIn = async () => {
+  const goooglesignIn = async () => {
     const data = await authClient.signIn.social({
       provider: "google",
     });
@@ -21,7 +22,11 @@ const LoginPage = () => {
     const { data, error } = await authClient.signIn.email(userData);
     console.log(data, 'data')
     console.log(error, 'error')
-    if(data){
+    if (error) {
+      toast.error(error.message)
+      return
+    }
+    if (data) {
       redirect('/')
     }
 

@@ -6,6 +6,7 @@ import Link from "next/link";
 import logo from '@/assets/google.png'
 import { authClient } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
+import { toast } from "react-toastify";
 
 const RegisterPage = () => {
   const goooglesignIn = async () => {
@@ -22,6 +23,10 @@ const RegisterPage = () => {
     const { data, error } = await authClient.signUp.email(userData);
     console.log(data, 'data')
     console.log(error, 'error')
+    if (error) {
+      toast.error(error.message)
+      return
+    }
     if (data) {
       redirect('/login')
     }
