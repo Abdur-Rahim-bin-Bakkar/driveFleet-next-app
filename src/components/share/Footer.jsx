@@ -121,7 +121,7 @@ const Footer = () => {
             <div className='flex gap-4 mt-6 justify-center mb-5'>
 
                 <Link
-                    href={'https://facebook.com'}
+                    href={'https://www.facebook.com/profile.php?id=61582681106407'}
                     target='_blank'
                     className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
                 >
@@ -131,7 +131,7 @@ const Footer = () => {
                
 
                 <Link
-                    href={'https://linkedin.com'}
+                    href={'https://www.linkedin.com/in/fswd-abdur-rahim-bin-bakkar/'}
                     target='_blank'
                     className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
                 >
@@ -139,7 +139,7 @@ const Footer = () => {
                 </Link>
 
                 <Link
-                    href={'https://github.com'}
+                    href={'https://github.com/Abdur-Rahim-bin-Bakkar'}
                     target='_blank'
                     className='bg-[#36ADA3] p-3 rounded-full hover:scale-110 duration-300'
                 >

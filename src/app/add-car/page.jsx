@@ -14,189 +14,155 @@ const AddCarForm = () => {
         refetch //refetch the session
     } = authClient.useSession()
     const userId = session?.user?.id
-    console.log(session)
-    console.log(userId, 'user id')
+    // console.log(session)
+    // console.log(userId, 'user id')
 
     const handleSubmit = async (e) => {
-        const { data: tokenData } = await authClient.token()
         e.preventDefault();
+        const { data: tokenData } = await authClient.token()
         // console.log(formData);
         const formData = new FormData(e.target);
 
         const data = Object.fromEntries(formData.entries());
 
-        console.log(data);
+        console.log(data,'form data');
+        // console.log(tokenData,'token Data')
         const addedData = { ...data, userId }
-        const res = await fetch('http://localhost:5000/add-car', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/add-car`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
 
-                authorization: `Bearer ${tokenData}`
+                authorization: `Bearer ${tokenData.token}`
             },
             body: JSON.stringify(addedData)
         })
         const result = await res.json()
-        console.log(result)
+        console.log(result,'result')
         if (result) {
-            redirect('/cars')
+            redirect('/my-added-cars')
         }
     };
 
     return (
-        <div className="flex justify-center items-center py-10 px-4 bg-gray-50">
-            <Card className="w-full max-w-2xl p-6 shadow-lg rounded-2xl">
-                <h2 className="text-2xl font-bold text-center text-[#36ADA3] mb-6">
-                    Add New Car
-                </h2>
+     <div className="min-h-screen flex justify-center items-center py-10 px-4 bg-gradient-to-br from-gray-50 via-white to-gray-100">
+    <Card className="w-full max-w-3xl p-8 shadow-2xl rounded-3xl border border-gray-100 bg-white/80 backdrop-blur-md">
 
-                <form action="" onSubmit={handleSubmit} className="space-y-5">
-                    <TextField
-                        isRequired
-                        name="carName"
-                        validate={(value) => {
-                            if (value.length < 3) {
-                                return "Name must be at least 3 characters";
-                            }
-                            return null;
-                        }}
-                    >
-                        <Label>Name</Label>
-                        <Input placeholder="Enter your Name" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        isRequired
-                        name="dailyRentPrice"
-                        validate={(value) => {
-                            if (value.length < 3) {
-                                return "Name must be at least 3 characters";
-                            }
-                            return null;
-                        }}
-                    >
-                        <Label>Daily Rent Price</Label>
-                        <Input placeholder="Daily Rent Price" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        isRequired
-                        name="imageURL"
-                        type="url"
-                    // validate={(value) => {
-                    //   const urlPattern =
-                    //     /^(https?:\/\/)?([\w\-])+\.{1}[a-zA-Z]{2,}(\/[\w\-._~:/?#[\]@!$&'()*+,;=]*)?$/;
+        <h2 className="text-3xl font-bold text-center bg-gradient-to-r from-[#36ADA3] to-[#2f8f86] text-transparent bg-clip-text mb-8">
+            Add New Car
+        </h2>
 
-                    //   if (!urlPattern.test(value)) {
-                    //     return "Please enter a valid image URL";
-                    //   }
+        <form action="" onSubmit={handleSubmit} className="space-y-6">
 
-                    //   return null;
-                    // }}
-                    >
-                        <Label>Image URL</Label>
+            <TextField
+                isRequired
+                name="carName"
+                validate={(value) => {
+                    if (value.length < 3) {
+                        return "Name must be at least 3 characters";
+                    }
+                    return null;
+                }}
+            >
+                <Label className="text-gray-700 font-medium">Car Name</Label>
+                <Input className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" placeholder="Enter car name" />
+                <FieldError />
+            </TextField>
 
-                        <Input placeholder="Enter Image URL" />
+            <TextField
+                isRequired
+                name="dailyRentPrice"
+                validate={(value) => {
+                    if (value.length < 1) {
+                        return "Price is required";
+                    }
+                    return null;
+                }}
+            >
+                <Label className="text-gray-700 font-medium">Daily Rent Price</Label>
+                <Input className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" placeholder="Enter daily rent price" />
+                <FieldError />
+            </TextField>
 
-                        <FieldError />
-                    </TextField>
-                    <div className="md:flex items-center gap-5">
+            <TextField isRequired name="imageURL" type="url">
+                <Label className="text-gray-700 font-medium">Image URL</Label>
+                <Input className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" placeholder="Enter image URL" />
+                <FieldError />
+            </TextField>
 
-                        <Select name="carType" className="w-full" placeholder="Select one">
-                            <Label>Car Type</Label>
-                            <Select.Trigger>
-                                <Select.Value />
-                                <Select.Indicator />
-                            </Select.Trigger>
-                            <Select.Popover>
-                                <ListBox>
-                                    <ListBox.Item id="SUV" textValue="SUV">
-                                        SUV
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
-                                    <ListBox.Item id="Sedan " textValue="Sedan ">
-                                        Sedan
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
-                                    <ListBox.Item id="Hatchback  " textValue="Hatchback  ">
-                                        Hatchback
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
-                                    <ListBox.Item id="Luxury  " textValue="Luxury  ">
-                                        Luxury
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
+            <div className="md:flex items-center gap-5 space-y-5 md:space-y-0">
 
-                                </ListBox>
-                            </Select.Popover>
-                        </Select>
-                        <Select name="availabilityStatus" className="w-full" placeholder="Select one">
-                            <Label>Availability Status</Label>
-                            <Select.Trigger>
-                                <Select.Value />
-                                <Select.Indicator />
-                            </Select.Trigger>
-                            <Select.Popover>
-                                <ListBox>
-                                    <ListBox.Item id="Avaible" textValue="Avaible">
-                                        Avaible
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
-                                    <ListBox.Item id="Unavaible" textValue="Unavaible">
-                                        Unavaible
-                                        <ListBox.ItemIndicator />
-                                    </ListBox.Item>
+                <Select name="carType" className="w-full" placeholder="Select car type">
+                    <Label className="text-gray-700 font-medium">Car Type</Label>
+                    <Select.Trigger className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3]">
+                        <Select.Value />
+                        <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                        <ListBox>
+                            <ListBox.Item id="SUV" textValue="SUV">SUV</ListBox.Item>
+                            <ListBox.Item id="Sedan" textValue="Sedan">Sedan</ListBox.Item>
+                            <ListBox.Item id="Hatchback" textValue="Hatchback">Hatchback</ListBox.Item>
+                            <ListBox.Item id="Luxury" textValue="Luxury">Luxury</ListBox.Item>
+                        </ListBox>
+                    </Select.Popover>
+                </Select>
 
-                                </ListBox>
-                            </Select.Popover>
-                        </Select>
-                    </div>
-                    <TextField
-                        isRequired
-                        name="pickupLocation"
-                        validate={(value) => {
-                            if (value.length < 3) {
-                                return "Name must be at least 3 characters";
-                            }
-                            return null;
-                        }}
-                    >
-                        <Label>Pickup Location</Label>
-                        <Input placeholder="Pickup Location" />
-                        <FieldError />
-                    </TextField>
-                    <TextField
-                        isRequired
-                        name="seatCapacity"
-                        // validate={(value) => {
-                        //     if (value.length < 0) {
-                        //         return "Name must be at least 0 characters";
-                        //     }
-                        //     return null;
-                        // }}
-                        defaultValue="5"
-                    >
-                        <Label>Seat Capacity
-                        </Label>
-                        <Input placeholder="Seat Capacity" />
-                        <FieldError />
-                    </TextField>
-                    <TextField className="w-full max-w-full" name="description">
-                        <Label>Description</Label>
-                        <TextArea placeholder="Write your message here..." rows={3} />
-                        <Description>Maximum 500 characters</Description>
-                    </TextField>
+                <Select name="availabilityStatus" className="w-full" placeholder="Select status">
+                    <Label className="text-gray-700 font-medium">Availability Status</Label>
+                    <Select.Trigger className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3]">
+                        <Select.Value />
+                        <Select.Indicator />
+                    </Select.Trigger>
+                    <Select.Popover>
+                        <ListBox>
+                            <ListBox.Item id="Available" textValue="Available">Available</ListBox.Item>
+                            <ListBox.Item id="Unavailable" textValue="Unavailable">Unavailable</ListBox.Item>
+                        </ListBox>
+                    </Select.Popover>
+                </Select>
 
+            </div>
 
+            <TextField
+                isRequired
+                name="pickupLocation"
+                validate={(value) => {
+                    if (value.length < 3) {
+                        return "Pickup location must be at least 3 characters";
+                    }
+                    return null;
+                }}
+            >
+                <Label className="text-gray-700 font-medium">Pickup Location</Label>
+                <Input className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" placeholder="Enter pickup location" />
+                <FieldError />
+            </TextField>
 
+            <TextField
+                isRequired
+                name="seatCapacity"
+                defaultValue="5"
+            >
+                <Label className="text-gray-700 font-medium">Seat Capacity</Label>
+                <Input className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" placeholder="Seat capacity" />
+                <FieldError />
+            </TextField>
 
+            <TextField className="w-full max-w-full" name="description">
+                <Label className="text-gray-700 font-medium">Description</Label>
+                <TextArea className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-[#36ADA3] outline-none" rows={4} placeholder="Write description..." />
+                <Description className="text-gray-500">Maximum 500 characters</Description>
+            </TextField>
 
+            <Button type="submit" className="w-full py-3 rounded-xl font-bold bg-gradient-to-r from-[#36ADA3] to-[#2f8f86] text-white shadow-lg hover:shadow-2xl hover:scale-[1.01] transition-all duration-300">
+                Add Car
+            </Button>
 
-                    <Button type="submit" className={'bg-transparent  w-full font-bold border border-green-500 text-green-500'}>Add Car</Button>
-                </form>
+        </form>
 
-            </Card>
-        </div>
+    </Card>
+</div>
     );
 };
 

@@ -7,12 +7,12 @@ import { redirect } from "next/navigation";
 export function DeleteModal({ id }) {
     console.log(id, 'aimito ai id i khoji')
     const haldleDelete = async () => {
-        const res = await fetch(`http://localhost:5000/add-car/${id}`, {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/add-car/${id}`, {
             method: "DELETE"
         })
         const result = await res.json()
         if (result) {
-         redirect('/my-added-car')   
+         redirect('/my-added-cars')   
         }
     }
     return (

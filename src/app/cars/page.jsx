@@ -8,7 +8,7 @@ const AllCarsPage = async ({searchParams}) => {
     const carType = params?.carType || "";
 
     const res = await fetch(
-        `http://localhost:5000/all-cars?search=${search}&carType=${carType}`,
+        `${process.env.NEXT_PUBLIC_API_SERVER_API}/all-cars?search=${search}&carType=${carType}`,
         {
             cache: "no-store"
         }

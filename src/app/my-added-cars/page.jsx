@@ -10,7 +10,7 @@ const MyAddedPage = async () => {
     const session = await auth.api.getSession({
         headers: await headers() // you need to pass the headers object.
     })
-    const res = await fetch(`http://localhost:5000/add-car/${session?.user?.id}`,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/add-car/${session?.user?.id}`,{
            headers:{
              authorization:`Bearer ${token}`
            }

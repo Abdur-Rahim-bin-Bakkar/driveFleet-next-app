@@ -17,13 +17,13 @@ const BookingPage = async () => {
     console.log(token,'token')
 
     console.log(session?.user?.id)
-    const res = await fetch(`http://localhost:5000/bookings/${session?.user?.id}` ,{
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/bookings/${session?.user?.id}` ,{
        headers:{
          authorization:`Bearer ${token}`
        }
     })
     const bookinsCar = await res.json()
-    console.log(bookinsCar)
+    console.log(bookinsCar,'bookings')
     if (bookinsCar.length < 1) {
         return (
             <div className="flex items-center justify-center py-20 px-4">

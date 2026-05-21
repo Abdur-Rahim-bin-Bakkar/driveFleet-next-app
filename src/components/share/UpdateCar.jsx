@@ -24,7 +24,7 @@ const UpdateCar = ({ data }) => {
         const {imageURL,availabilityStatus,pickupLocation,description,carType,dailyRentPrice} = updateData
 
         console.log(availabilityStatus, 'ache naki ki bolo')
-        const res = await fetch(`http://localhost:5000/add-car/${data?._id}`,{
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/add-car/${data?._id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify({imageURL,availabilityStatus,pickupLocation,description,carType,dailyRentPrice})

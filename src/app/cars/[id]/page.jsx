@@ -21,7 +21,7 @@ const CarDetailsPage = async ({ params }) => {
 
     const { id } = await params;
     console.log(id)
-    const res = await fetch(`http://localhost:5000/car/${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/car/${id}`, {
         headers: {
             authorization: `Bearer ${token}`
         }

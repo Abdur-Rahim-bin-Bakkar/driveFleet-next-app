@@ -2,6 +2,7 @@ import React from 'react';
 import image from '@/assets/banner.png'
 import Link from 'next/link';
 import { Button } from '@heroui/react';
+import { FaInternetExplorer } from 'react-icons/fa';
 
 const Banner = () => {
     return (
@@ -16,7 +17,7 @@ const Banner = () => {
             }}
         >
             <div className="max-w-3xl space-y-5 text-white">
-                <h1 className='text-3xl md:text-5xl font-bold leading-tight'>
+                <h1 className="text-3xl md:text-5xl font-bold leading-tight bg-gradient-to-r from-blue-600 via-purple-500 to-pink-500 text-transparent bg-clip-text">
                     Drive Your Dream Car with Confidence
                 </h1>
 
@@ -29,6 +30,7 @@ const Banner = () => {
 
                 <Link href="/cars">
                     <Button className='bg-[#36ADA3] text-white rounded-md hover:scale-105 hover:-translate-y-1 duration-700'>
+                        <FaInternetExplorer />
                         Explore Cars
                     </Button>
                 </Link>

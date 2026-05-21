@@ -29,7 +29,7 @@ export function BookModal({ session, carDetails }) {
         const userId = await session?.user?.id
         const date = new Date()
         const bookingData = await { userId, driver, message, carDetails, date }
-        const res = await fetch('http://localhost:5000/bookings', {
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/bookings`, {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(bookingData)
@@ -37,7 +37,7 @@ export function BookModal({ session, carDetails }) {
         })
         const result = await res.json()
 
-        const res2 = await fetch(`http://localhost:5000/bookings/${id}`,{
+        const res2 = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/bookings/${id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
             // body:JSON.stringify({name,age,email,role})

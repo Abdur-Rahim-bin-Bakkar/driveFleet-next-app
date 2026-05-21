@@ -17,6 +17,10 @@ export const auth = betterAuth({
     minPasswordLength: 6,
     maxPasswordLength: 128,
   },
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://drivefleet-next-app.vercel.app",
+  ],
   socialProviders: {
     google: {
       clientId: process.env.GOOGLE_CLIENT_ID,
