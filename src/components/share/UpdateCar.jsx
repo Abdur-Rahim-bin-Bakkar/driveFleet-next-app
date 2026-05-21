@@ -20,10 +20,12 @@ const UpdateCar = ({ data }) => {
         const formData = new FormData(e.target);
 
         const updateData = Object.fromEntries(formData.entries());
-        console.log(updateData)
+        console.log(updateData,'UP Data')
         const {imageURL,availabilityStatus,pickupLocation,description,carType,dailyRentPrice} = updateData
 
         console.log(availabilityStatus, 'ache naki ki bolo')
+        console.log(carType, 'ache naki ki bolo')
+        console.log(data, 'etai ki id')
         const res = await fetch(`${process.env.NEXT_PUBLIC_API_SERVER_API}/add-car/${data?._id}`,{
             method:'PATCH',
             headers:{'Content-Type':'application/json'},
