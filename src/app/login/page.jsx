@@ -53,7 +53,7 @@ const LoginPage = () => {
             }}
           >
             <Label>Email</Label>
-            <Input placeholder="john@example.com" />
+            <Input placeholder="enter email address" />
             <FieldError />
           </TextField>
           <TextField

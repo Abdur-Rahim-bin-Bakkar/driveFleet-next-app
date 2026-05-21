@@ -14,6 +14,7 @@ import { UserDropdown } from './UserDropdown';
 import { FaHome, FaInternetExplorer } from 'react-icons/fa';
 import { IoIosAddCircleOutline } from 'react-icons/io';
 import { CiFaceMeh } from 'react-icons/ci';
+import { MdDownloading } from 'react-icons/md';
 
 const Navbar = () => {
     const handleSignOut = async (e) => {
@@ -92,7 +93,7 @@ const Navbar = () => {
                 {/* Desktop Buttons */}
                 <div className='hidden md:flex items-center gap-3'>
 
-                    {isPending?<span>User Loading.....</span>:
+                    {isPending?<MdDownloading className='text-2xl' />:
                         session ? <UserDropdown /> :
 
                             <Link href={'/login'}>
